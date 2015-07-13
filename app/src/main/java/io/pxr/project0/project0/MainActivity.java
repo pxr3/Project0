@@ -16,28 +16,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     // Button Events
     public void spotifyTapped(View view) {
         displayToast("This button will launch my Spotify app!");
@@ -64,10 +42,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Toast Management
+    private Toast mAppToast;
+
+
     private void displayToast(String toastString) {
+        //Stop any previous toasts
+        if(mAppToast !=null){
+            mAppToast.cancel();
+        }
+
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context, toastString, duration);
-        toast.show();
+        mAppToast = Toast.makeText(context, toastString, duration);
+        mAppToast.show();
     }
 }
